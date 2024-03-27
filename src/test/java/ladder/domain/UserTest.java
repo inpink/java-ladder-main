@@ -19,16 +19,15 @@ public class UserTest {
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
-            assertThat(user).isNotNull();
-            assertThat(user.getName()).isEqualTo(name);
+            softly.assertThat(user).isNotNull();
+            softly.assertThat(user.getName()).isEqualTo(name);
         });
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "ABCDEF", "ABCDEFG"})
     public void 사용자_이름_길이가_범위를_벗어나면_안된다(String name) {
-        Assertions.assertThatThrownBy(() -> {
-            new User(name);
-        }).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> new User(name))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -2,8 +2,11 @@ package ladder.domain;
 
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
+
+import static ladder.domain.Line.EXIST;
+import static ladder.domain.Line.NOT_EXIST;
 
 public class RandomRowGenerator implements RowGenerator {
     private final SecureRandom random = new SecureRandom();
@@ -13,5 +16,8 @@ public class RandomRowGenerator implements RowGenerator {
         return IntStream.range(0,size)
                 .mapToObj(index -> random.nextBoolean())
                 .toList();
+    public List<Line> generate(int size) {
+        List<Line> row = new ArrayList<>();
+        return row;
     }
 }

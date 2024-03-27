@@ -5,9 +5,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-
 public class LadderTest {
 
     @ParameterizedTest
@@ -20,8 +17,8 @@ public class LadderTest {
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
-            assertThat(ladder).isNotNull();
-            assertThat(ladder.getRowSize()).isEqualTo(height);
+            softly.assertThat(ladder).isNotNull();
+            softly.assertThat(ladder.getRowSize()).isEqualTo(height);
         });
     }
 }

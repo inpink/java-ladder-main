@@ -6,8 +6,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class RandomRowGeneratorTest {
     private final RowGenerator rowGenerator = new RandomRowGenerator();
 
@@ -17,12 +15,12 @@ public class RandomRowGeneratorTest {
         // Given
 
         // When
-        List<Boolean> result = rowGenerator.generate(size);
+        List<Line> result = rowGenerator.generate(size);
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
-            assertThat(result).isNotNull();
-            assertThat(result.size()).isEqualTo(size);
+            softly.assertThat(result).isNotNull();
+            softly.assertThat(result.size()).isEqualTo(size);
         });
     }
 }

@@ -5,7 +5,10 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.stream.IntStream;
+
+import static ladder.domain.Line.EXIST;
+import static ladder.domain.Line.NOT_EXIST;
 
 public class RowTest {
 
@@ -19,8 +22,10 @@ public class RowTest {
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
-            assertThat(row).isNotNull();
-            assertThat(row.getCellSize()).isEqualTo(userLength - 1);
+            softly.assertThat(row).isNotNull();
+            softly.assertThat(row.getCellSize()).isEqualTo(userLength - 1);
         });
     }
+
+
 }

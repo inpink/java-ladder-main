@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static ladder.domain.Line.EXIST;
+import static ladder.domain.Line.NOT_EXIST;
 
 public class RowGeneratorTest {
 
@@ -19,9 +20,9 @@ public class RowGeneratorTest {
     static class SequenceRowGenerator implements RowGenerator {
 
         @Override
-        public List<Boolean> generate(int size) {
+        public List<Line> generate(int size) {
             return IntStream.range(0, size)
-                    .mapToObj(index -> index % 2 == 0)
+                    .mapToObj(index -> Line.getLine(index % 2 == 0))
                     .toList();
         }
     }
@@ -32,34 +33,34 @@ public class RowGeneratorTest {
         // Given
 
         // When
-        List<Boolean> result = rowGenerator.generate(size);
+        List<Line> result = rowGenerator.generate(size);
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
-            assertThat(result).isNotNull();
-            assertThat(result.size()).isEqualTo(size);
+            softly.assertThat(result).isNotNull();
+            softly.assertThat(result.size()).isEqualTo(size);
         });
     }
 
     static Stream<Arguments> provideRowsForTest() {
         return Stream.of(
-                Arguments.of(3, List.of(true, false, true)),
-                Arguments.of(4, List.of(true, false, true, false))
+                Arguments.of(3, List.of(EXIST, NOT_EXIST, EXIST)),
+                Arguments.of(4, List.of(EXIST, NOT_EXIST, EXIST, NOT_EXIST))
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideRowsForTest")
-    public void 행은_순차적인_불린값을_가진다(int size, List<Boolean> row) {
+    public void 행은_순차적인_라인값을_가진다(int size, List<Line> row) {
         // Given
 
         // When
-        List<Boolean> result = rowGenerator.generate(size);
+        List<Line> result = rowGenerator.generate(size);
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
-            assertThat(result).isNotNull();
-            assertThat(result).isEqualTo(row);
+            softly.assertThat(result).isNotNull();
+            softly.assertThat(result).isEqualTo(row);
         });
     }
 }
