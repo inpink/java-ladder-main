@@ -27,5 +27,20 @@ public class RowTest {
         });
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+    public void 셀의_라인이_서로_겹치지_않는다(int userLength) {
+        // Given
+        Row row = new Row(userLength, new RandomRowGenerator());
 
+        // When
+
+        // Then
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(row).isNotNull();
+            IntStream.range(0, userLength - 1)
+                    .filter(index -> row.getCellLine(index) == EXIST && index > 0)
+                    .forEach(index -> softly.assertThat(row.getCellLine(index-1)).isEqualTo(NOT_EXIST));
+        });
+    }
 }
