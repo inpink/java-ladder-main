@@ -1,19 +1,18 @@
 package ladder.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Row {
-    private final List<Boolean> cells = new ArrayList<>();
+    private final RowGenerator rowGenerator;
+    private final List<Boolean> cells;
 
-    public Row(int userLength) {
-        addCells(userLength);
+    public Row(int userLength, RowGenerator rowGenerator) {
+        this.rowGenerator = rowGenerator;
+        cells = generateCells(userLength);
     }
 
-    private void addCells(int userLength) {
-        for (int i = 0; i < userLength-1; i++) {
-            cells.add(false);
-        }
+    private List<Boolean> generateCells(int userLength) {
+        return rowGenerator.generate(userLength-1);
     }
 
     public int getCellSize() {
