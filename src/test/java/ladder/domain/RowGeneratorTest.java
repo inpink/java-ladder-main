@@ -14,7 +14,6 @@ import static ladder.domain.Line.EXIST;
 import static ladder.domain.Line.NOT_EXIST;
 
 public class RowGeneratorTest {
-
     private final RowGenerator rowGenerator = new SequenceRowGenerator();
 
     static class SequenceRowGenerator implements RowGenerator {

@@ -11,7 +11,6 @@ import static ladder.domain.Line.EXIST;
 import static ladder.domain.Line.NOT_EXIST;
 
 public class RowTest {
-
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
     public void 사다리_폭은_사용자수_빼기_1이다(int userLength) {

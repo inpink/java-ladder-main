@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LadderTest {
-
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     public void 사다리는_높이_수만큼_행을_가진다(int height) {

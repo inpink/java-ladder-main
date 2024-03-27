@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserTest {
-
     @ParameterizedTest
     @ValueSource(strings = {"A", "AB", "ABC", "ABCD", "ABCDE"})
     public void 유효한_길이의_사용자_이름을_가진다(String name) {

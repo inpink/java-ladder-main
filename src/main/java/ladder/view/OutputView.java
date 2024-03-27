@@ -8,7 +8,6 @@ import ladder.domain.Users;
 import java.util.stream.IntStream;
 
 public class OutputView {
-
     public void outputResult(Users users, Ladder ladder) {
         outputUsers(users);
         outputLadder(users, ladder);
