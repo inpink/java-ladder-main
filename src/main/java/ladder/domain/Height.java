@@ -17,4 +17,8 @@ public class Height {
             throw new IllegalArgumentException();
         }
     }
+
+    public int getHeight() {
+        return height;
+    }
 }

@@ -11,7 +11,7 @@ public class LadderTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     public void 사다리는_높이_수만큼_행을_가진다(int height) {
         // Given
-        Ladder ladder = new Ladder(1, height, new SequenceRowGenerator());
+        Ladder ladder = new Ladder(1, new Height(height), new SequenceRowGenerator());
 
         // When
 

@@ -3,13 +3,17 @@ package ladder.domain;
 import java.util.List;
 
 public class Users {
-    private final List<User> Users;
+    private final List<User> users;
 
     public Users(List<User> users) {
-        Users = users;
+        this.users = users;
     }
 
     public List<User> getUsers() {
-        return Users;
+        return users;
+    }
+
+    public int getUserLength() {
+        return users.size();
     }
 }

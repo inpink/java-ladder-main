@@ -1,6 +1,8 @@
 package ladder.controller;
 
 import ladder.domain.Height;
+import ladder.domain.Ladder;
+import ladder.domain.RandomRowGenerator;
 import ladder.domain.Users;
 import ladder.view.InputView;
 import ladder.view.OutputView;
@@ -17,8 +19,10 @@ public class GameController {
 
     public void start() {
         Users users = inputView.inputUsers();
-        System.out.println(users.getUsers());
-
         Height height = inputView.inputHeight();
+
+        int userLength = users.getUserLength();
+        Ladder ladder = new Ladder(userLength, height, new RandomRowGenerator());
+        outputView.outputLadder(users,ladder);
     }
 }
