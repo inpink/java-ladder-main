@@ -7,12 +7,11 @@ public enum Line {
     NOT_EXIST(false, "     ");
 
     private final boolean value;
+    private final String description;
 
-    private final String descript;
-
-    Line(boolean value, String descript) {
+    Line(boolean value, String description) {
         this.value = value;
-        this.descript = descript;
+        this.description = description;
     }
 
     public static Line getLine(Boolean line) {
@@ -26,7 +25,7 @@ public enum Line {
         return value;
     }
 
-    public String getDescript() {
-        return descript;
+    public String getDescription() {
+        return description;
     }
 }

@@ -15,20 +15,25 @@ public class RandomRowGenerator implements RowGenerator {
     public List<Line> generate(int size) {
         List<Line> row = new ArrayList<>();
 
-        for (int i = 0; i < size; i++) {
+        for (int index = 0; index < size; index++) {
             Boolean randomValue = random.nextBoolean();
             Line cell = Line.getLine(randomValue);
 
-            if (cell == EXIST
-                    && !row.isEmpty()
-                    && row.get(i - 1) == EXIST) {
-                row.add(NOT_EXIST);
-                continue;
-            }
+            addNotDuplicatedCell(cell, row, index);
+        }
+        return row;
+    }
 
-            row.add(cell);
+    private static void addNotDuplicatedCell(Line cell,
+                                             List<Line> row,
+                                             int index) {
+        if (cell == EXIST
+                && !row.isEmpty()
+                && row.get(index - 1) == EXIST) {
+            row.add(NOT_EXIST);
+            return;
         }
 
-        return row;
+        row.add(cell);
     }
 }

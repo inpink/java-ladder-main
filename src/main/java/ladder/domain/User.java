@@ -16,6 +16,7 @@ public class User {
 
     private void validateNameLength(String candidateName) {
         int nameLength = candidateName.length();
+
         if (nameLength < MIN_NAME_LENGTH || nameLength > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException();
         }
