@@ -15,12 +15,12 @@ public class RandomRowGeneratorTest {
         // Given
 
         // When
-        List<Line> result = rowGenerator.generate(size);
+        Row result = rowGenerator.generate(size);
 
         // Then
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(result).isNotNull();
-            softly.assertThat(result.size()).isEqualTo(size);
+            softly.assertThat(result.getRowSize()).isEqualTo(size);
         });
     }
 }

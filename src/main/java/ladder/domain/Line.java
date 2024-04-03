@@ -1,31 +1,29 @@
 package ladder.domain;
 
-import java.util.Arrays;
+import java.security.SecureRandom;
 
-public enum Line {
-    EXIST(true, "-----"),
-    NOT_EXIST(false, "     ");
+public class Line {
+    private final boolean isExistent;
 
-    private final boolean value;
-    private final String description;
-
-    Line(boolean value, String description) {
-        this.value = value;
-        this.description = description;
+    public Line(boolean isExistent) {
+        this.isExistent = isExistent;
     }
 
-    public static Line getLine(Boolean line) {
-        return Arrays.stream(Line.values())
-                .filter(value -> value.getValue() == line)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException());
+    public static Line createRandomLine() {
+        SecureRandom random = new SecureRandom();
+        Boolean randomValue = random.nextBoolean();
+        return new Line(randomValue);
     }
 
-    public boolean getValue() {
-        return value;
+    public static Line createExistentLine() {
+        return new Line(false);
     }
 
-    public String getDescription() {
-        return description;
+    public static Line createNonExistentLine() {
+        return new Line(false);
+    }
+
+    public boolean isExistent() {
+        return isExistent;
     }
 }

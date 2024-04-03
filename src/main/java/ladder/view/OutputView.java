@@ -8,6 +8,10 @@ import ladder.domain.Users;
 import java.util.stream.IntStream;
 
 public class OutputView {
+    private static final String existentLine = "-----";
+    private static final String nonExistentLine = "     ";
+    private static final String dividingLine = "|";
+
     public void outputResult(Users users, Ladder ladder) {
         outputUsers(users);
         outputLadder(users, ladder);
@@ -15,16 +19,33 @@ public class OutputView {
 
     private static void outputLadder(Users users, Ladder ladder) {
         for (int x = 0; x < ladder.getRowSize(); x++) {
-            System.out.print("|");
+            System.out.print(dividingLine);
             outputRow(users, ladder, x);
             System.out.println();
         }
     }
 
-    private static void outputRow(Users users, Ladder ladder, int x) {
-        for (int y = 0; y < users.getUserLength() - 1; y++) {
-            Line cellLine = ladder.getCell(x, y);
-            System.out.print(cellLine.getDescription() + "|");
+    private static void outputRow(Users users, Ladder ladder, int rowIndex) {
+        for (int lineIndex = 0; lineIndex < users.getUserLength() - 1; lineIndex++) {
+            Line line = ladder.getLine(rowIndex, lineIndex);
+            outputLine(line);
+        }
+    }
+
+    private static void outputLine(Line line) {
+        outputExistentLine(line);
+        outputNonExistentLine(line);
+    }
+
+    private static void outputNonExistentLine(Line line) {
+        if (!line.isExistent()) {
+            System.out.print(nonExistentLine + dividingLine);
+        }
+    }
+
+    private static void outputExistentLine(Line line) {
+        if (line.isExistent()) {
+            System.out.print(existentLine + dividingLine);
         }
     }
 

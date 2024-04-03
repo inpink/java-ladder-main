@@ -3,23 +3,25 @@ package ladder.domain;
 import java.util.List;
 
 public class Row {
-    private final RowGenerator rowGenerator;
-    private final List<Line> cells;
+    private final List<Line> lines;
 
-    public Row(int userLength, RowGenerator rowGenerator) {
-        this.rowGenerator = rowGenerator;
-        cells = generateCells(userLength);
+    public Row(List<Line> lines) {
+        this.lines = lines;
     }
 
-    private List<Line> generateCells(int userLength) {
-        return rowGenerator.generate(userLength-1);
+    public static Row createRandomRow(RowGenerator rowGenerator, int size) {
+        return rowGenerator.generate(size);
     }
 
-    public int getCellSize() {
-        return cells.size();
+    public int getRowSize() {
+        return lines.size();
     }
 
-    public Line getCellLine(int index) {
-        return cells.get(index);
+    public Line getLine(int index) {
+        return lines.get(index);
+    }
+
+    public List<Line> getLines() {
+        return lines;
     }
 }

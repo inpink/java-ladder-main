@@ -26,8 +26,8 @@ public class GameController {
     }
 
     private static Ladder generateLadder(Users users, Height height) {
-        int userLength = users.getUserLength();
-        Ladder ladder = new Ladder(userLength, height, new RandomRowGenerator());
+        int userSize = users.getUserLength();
+        Ladder ladder = Ladder.createRandomLadder(userSize, height, new RandomRowGenerator());
 
         return ladder;
     }

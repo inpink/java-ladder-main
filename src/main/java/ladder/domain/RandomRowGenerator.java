@@ -1,39 +1,35 @@
 package ladder.domain;
 
-
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ladder.domain.Line.EXIST;
-import static ladder.domain.Line.NOT_EXIST;
-
 public class RandomRowGenerator implements RowGenerator {
-    private final SecureRandom random = new SecureRandom();
 
     @Override
-    public List<Line> generate(int size) {
-        List<Line> row = new ArrayList<>();
+    public Row generate(int size) {
+        List<Line> lines = new ArrayList<>();
+        addFirstLine(lines);
 
-        for (int index = 0; index < size; index++) {
-            Boolean randomValue = random.nextBoolean();
-            Line cell = Line.getLine(randomValue);
+        for (int index = 1; index < size; index++) {
+            Line line = Line.createRandomLine();
+            Line beforeLine = lines.get(index - 1);
 
-            addNotDuplicatedCell(cell, row, index);
+            addNotDuplicatedLine(line, beforeLine, lines);
         }
-        return row;
+        return new Row(lines);
     }
 
-    private static void addNotDuplicatedCell(Line cell,
-                                             List<Line> row,
-                                             int index) {
-        if (cell == EXIST
-                && !row.isEmpty()
-                && row.get(index - 1) == EXIST) {
-            row.add(NOT_EXIST);
+    private void addFirstLine(List<Line> row) {
+        Line line = Line.createRandomLine();
+        row.add(line);
+    }
+
+    private void addNotDuplicatedLine(Line line, Line beforeLine, List<Line> lines) {
+        if (beforeLine.isExistent()) {
+            lines.add(Line.createNonExistentLine());
             return;
         }
 
-        row.add(cell);
+        lines.add(line);
     }
 }

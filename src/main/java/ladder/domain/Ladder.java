@@ -1,28 +1,41 @@
 package ladder.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Ladder {
-    private final RowGenerator rowGenerator;
-    private final List<Row> graph;
+    private final List<Row> rows;
 
-    public Ladder(int userLength, Height height, RowGenerator rowGenerator) {
-        this.rowGenerator = rowGenerator;
-        this.graph = initGraph(userLength, height);
+    public Ladder(List<Row> rows) {
+        this.rows = rows;
     }
 
-    private List<Row> initGraph(int userLength, Height height) {
-        return IntStream.range(0, height.getHeight())
-                .mapToObj(index -> new Row(userLength, rowGenerator))
-                .toList();
+    public static Ladder createRandomLadder(int userSize,
+                                            Height height,
+                                            RowGenerator rowGenerator) {
+        List<Row> rows = new ArrayList<>();
+
+        for(int i = 0; i < height.getValue(); i++) {
+            int lineSize = calculateSequentialSize(userSize);
+            Row row = Row.createRandomRow(rowGenerator, lineSize);
+            rows.add(row);
+        }
+        return new Ladder(rows);
+    }
+
+    private static int calculateSequentialSize(int userSize) {
+        return userSize - 1;
     }
 
     public int getRowSize() {
-        return graph.size();
+        return rows.size();
     }
 
-    public Line getCell(int x, int y) {
-        return graph.get(x).getCellLine(y);
+    public Line getLine(int rowIndex, int lineIndex) {
+        return rows.get(rowIndex).getLine(lineIndex);
+    }
+
+    public List<Row> getRows() {
+        return rows;
     }
 }

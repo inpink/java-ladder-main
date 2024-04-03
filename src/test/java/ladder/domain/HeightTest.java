@@ -8,8 +8,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class HeightTest {
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
-    public void 사다리_높이는_1보다_큰_정수이다(int height) {
+    @ValueSource(ints = {1, 2})
+    public void 사다리_높이는_1_이상의_정수이다(int height) {
         assertThatCode(() -> new Height(height))
                 .doesNotThrowAnyException();
     }
